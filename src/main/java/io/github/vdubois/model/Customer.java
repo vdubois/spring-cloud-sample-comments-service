@@ -1,5 +1,6 @@
 package io.github.vdubois.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.validator.constraints.Email;
 
 import javax.persistence.Entity;
@@ -28,6 +29,7 @@ public class Customer {
     @Email
     private String email;
 
+    @JsonIgnore
     @OneToMany
     private Set<Comment> comments = new HashSet<>();
 
