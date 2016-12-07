@@ -1,7 +1,7 @@
 package io.github.vdubois.controller;
 
 import io.github.vdubois.model.Comment;
-import io.github.vdubois.repository.CommentRepository;
+import io.github.vdubois.service.CommentService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
@@ -14,14 +14,14 @@ import java.util.List;
 @RestController
 public class CommentsController {
 
-    private CommentRepository commentRepository;
+    private CommentService commentService;
 
-    public CommentsController(CommentRepository commentRepository) {
-        this.commentRepository = commentRepository;
+    public CommentsController(CommentService commentService) {
+        this.commentService = commentService;
     }
 
     @GetMapping("/books/{isbn}/comments")
     public List<Comment> findCommentsForBookWithIsbn(@PathVariable(value = "isbn") String isbn) {
-        return commentRepository.findByBookIsbn(isbn);
+        return commentService.findByBookIsbn(isbn);
     }
 }
