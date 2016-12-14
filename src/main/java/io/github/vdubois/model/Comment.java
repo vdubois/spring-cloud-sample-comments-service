@@ -8,7 +8,9 @@ import javax.persistence.ManyToOne;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Past;
 import java.io.Serializable;
+import java.time.LocalDateTime;
 
 /**
  * Created by vdubois on 16/11/16.
@@ -27,6 +29,10 @@ public class Comment implements Serializable {
 
     @NotNull
     private String content;
+
+    @NotNull
+    @Past
+    private LocalDateTime creationDate;
 
     @ManyToOne
     private Customer customer;
@@ -56,6 +62,14 @@ public class Comment implements Serializable {
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    public LocalDateTime getCreationDate() {
+        return creationDate;
+    }
+
+    public void setCreationDate(LocalDateTime creationDate) {
+        this.creationDate = creationDate;
     }
 
     public Customer getCustomer() {

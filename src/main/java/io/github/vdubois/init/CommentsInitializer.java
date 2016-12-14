@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.stream.Stream;
 
 /**
@@ -28,7 +30,7 @@ public class CommentsInitializer implements CommandLineRunner {
 
     @Override
     public void run(String... strings) throws Exception {
-        Stream.of("vdubois,dubois.vct@free.fr,4,978-1449374648,Excellent livre!!", "starbuxman,josh.long@pivotal.com,5,978-1449374648,A must read").forEach(
+        Stream.of("vdubois,dubois.vct@free.fr,4,978-1449374648,Excellent livre!!,2016-01-02 11:52:36", "starbuxman,josh.long@pivotal.com,5,978-1449374648,A must read,2015-08-16 06:38:12").forEach(
                 tuple -> {
                     String[] commentsCaracteristics = tuple.split(",");
                     Customer customer = new Customer();
@@ -40,6 +42,8 @@ public class CommentsInitializer implements CommandLineRunner {
                     comment.setBookIsbn(commentsCaracteristics[3]);
                     comment.setContent(commentsCaracteristics[4]);
                     comment.setCustomer(customer);
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+                    comment.setCreationDate(LocalDateTime.parse(commentsCaracteristics[5], formatter));
                     commentRepository.save(comment);
                 }
         );
