@@ -30,6 +30,7 @@ public class CommentsInitializer implements CommandLineRunner {
 
     @Override
     public void run(String... strings) throws Exception {
+        Thread.currentThread().sleep((long) (Math.random() * 10000));
         Stream.of("vdubois,dubois.vct@free.fr,4,978-1449374648,Excellent livre!!,2016-01-02 11:52:36", "starbuxman,josh.long@pivotal.com,5,978-1449374648,A must read,2015-08-16 06:38:12").forEach(
                 tuple -> {
                     String[] commentsCaracteristics = tuple.split(",");
