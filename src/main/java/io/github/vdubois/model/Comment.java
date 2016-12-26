@@ -10,7 +10,7 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.util.Date;
 
 /**
  * Created by vdubois on 16/11/16.
@@ -32,7 +32,7 @@ public class Comment implements Serializable {
 
     @NotNull
     @Past
-    private LocalDateTime creationDate;
+    private Date creationDate;
 
     @ManyToOne
     private Customer customer;
@@ -64,11 +64,11 @@ public class Comment implements Serializable {
         this.content = content;
     }
 
-    public LocalDateTime getCreationDate() {
+    public Date getCreationDate() {
         return creationDate;
     }
 
-    public void setCreationDate(LocalDateTime creationDate) {
+    public void setCreationDate(Date creationDate) {
         this.creationDate = creationDate;
     }
 

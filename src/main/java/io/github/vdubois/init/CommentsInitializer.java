@@ -8,8 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
+import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.stream.Stream;
 
 /**
@@ -44,7 +46,7 @@ public class CommentsInitializer implements CommandLineRunner {
                     comment.setContent(commentsCaracteristics[4]);
                     comment.setCustomer(customer);
                     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-                    comment.setCreationDate(LocalDateTime.parse(commentsCaracteristics[5], formatter));
+                    comment.setCreationDate(Date.from(Instant.from(LocalDateTime.parse(commentsCaracteristics[5], formatter))));
                     commentRepository.save(comment);
                 }
         );
